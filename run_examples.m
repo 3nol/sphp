@@ -2,7 +2,7 @@
 close all
 clc
 
-run('vlfeat-0.9.14/toolbox/vl_setup');
+run('vlfeat-0.9.21/toolbox/vl_setup');
 
 % Example 1: temple
 img_n = 2; % The number of input images
