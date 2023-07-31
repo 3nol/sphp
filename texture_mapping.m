@@ -83,7 +83,7 @@ for i = 1 : img_n
     write_matrix_to_file([outmesh_X{i}; outmesh_Y{i}], [mapping_location 'outmesh.txt']);
 
     eval(['cd ' mapping_location])
-    dos(sprintf('texture_mapping.exe ../%s %d %d %d %d %s %s %s %d %s', ...
+    dos(sprintf('wine texture_mapping.exe ../%s %d %d %d %d %s %s %s %d %s', ...
         in_name{i}, meshW, meshH, outimg_w, outimg_h, 'inmesh.txt', 'outmesh.txt', 'out.jpg', drawmesh, bgcolor));
     c1out{i} = im2double(imread('output.jpg'));
     c1omask{i} = im2double(imread('out_mask.png'));
