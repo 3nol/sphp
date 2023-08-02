@@ -138,4 +138,4 @@ c1para = compute_c1_warp_coeff(H0, t, c, theta, ub1, ub2, zeroR_ON);
 %% c1 warp for each image
 img_grid_size = 10; % for warping
 mdltpara = [];
-[c1out, c1omask, ~] = texture_mapping(in_name, imgw, imgh, img_grid_size, T, warp_type, H, ref, tar, c1para, mdltpara, 0, 'white');
+[c1out, c1omask, ~] = texture_mapping(in_name, imgw, imgh, img_grid_size, T, warp_type, H, ref, tar, c1para, mdltpara, 0, 'black');
