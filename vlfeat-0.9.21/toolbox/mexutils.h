@@ -170,15 +170,6 @@ mxSetDimensionsOctaveWorkaround(mxArray * array, const mwSize  *dims, int ndims)
  **/
 
 /* these attributes suppress undefined symbols warning with GCC */
-#ifdef VL_COMPILER_GNUC
-#if (! defined(HAVE_OCTAVE))
-EXTERN_C void __attribute__((noreturn))
-mexErrMsgIdAndTxt (const char * identifier, const char * err_msg, ...) ;
-#else
-extern void __attribute__((noreturn))
-mexErrMsgIdAndTxt (const char *id, const char *s, ...);
-#endif
-#endif
 
 #define MEXUTILS_RAISE_HELPER_A \
   char const * errorString ; \
