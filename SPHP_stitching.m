@@ -62,7 +62,7 @@ G = sparse([edge_list(:, 1); edge_list(:, 2)], ...
 % compute homography between ith img and REFERENCE img
 for i = 1 : img_n
     if i == ref, continue; end
-    [~, path, ~] = graphshortestpath(G, i, ref); % path from ith img to ref img
+    path = shortestpath(digraph(G), i, ref); % path from ith img to ref img
     tmpH = eye(3);
     for ppi = 1 : numel(path)-1
         tmpH = H{path(ppi+1), path(ppi)} * tmpH;
@@ -73,7 +73,7 @@ end
 % compute homography between ith img and TARGET img
 for i = 1 : img_n
     if i == tar, continue; end
-    [~, path, ~] = graphshortestpath(G, i, tar); % path from ith img to tar img
+    path = shortestpath(digraph(G), i, tar); % path from ith img to tar img
     tmpH = eye(3);
     for ppi = 1 : numel(path)-1
         tmpH = H{path(ppi+1), path(ppi)} * tmpH;
@@ -95,7 +95,7 @@ for i = 1 : img_n
 end
 
 % apply linear blending and write-out result
-c1all = linear_blending(c1out, c1omask);
+c1all = linear_blending(c1out, c1omask, img_n);
 denom = zeros(size(c1out{1}));
 for i = 1 : img_n
     denom = denom + c1omask{i};
