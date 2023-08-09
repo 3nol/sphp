@@ -1,9 +1,4 @@
 
-close all
-clc
-
-run('vlfeat-0.9.21/toolbox/vl_setup');
-
 img_n = 2;
 in_name = cell(img_n,1);
 in_name{1} = 'images/temple_01.jpg';
@@ -23,14 +18,11 @@ warp_type = 'ours';
 zeroR_ON = 1;
 
 % We use a pre-computed homography here.
-H = cell(img_n, img_n);
-for i = 1 : img_n
-    H{i, i} = eye(3);
-end
-H{1,2} = [0.56965387 -0.04795213  366.57816; ...
-         -0.08731978  0.87915248  21.069869; ...
-         -0.00057594 -0.00003427  1.0000000];
-H{2,1} = inv(H{1,2});
+cachedH = cell(1, 1);
+cachedH{1,1} = inv([0.56965387 -0.04795213  366.57816; ...
+                   -0.08731978  0.87915248  21.069869; ...
+                   -0.00057594 -0.00003427  1.0000000]);
+H = preprocess_matrix(in_name, edge_list, ref, tar, cachedH);
 [c1out, c1omask] = SPHP_warp(in_name, 2, H, ref, tar, warp_type, zeroR_ON);
 
 % Writing images to results.
