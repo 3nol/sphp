@@ -45,7 +45,7 @@ bbarea = (all_maxx-all_minx)*(all_maxy-all_miny); % the area of bounding box
 %if all_minx~=0 || all_miny~=0, fprintf('%.12f %.12f\n', all_minx, all_miny); pause; end
 
 % scale down to avoid memory issue
-max_size = 600*800;
+max_size = 8000*3000;
 scl = sqrt(max_size/bbarea);
 T2 = [scl, 0, 0; 0, scl, 0; 0, 0, 1];
 for i = 1 : img_n
