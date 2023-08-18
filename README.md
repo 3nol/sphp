@@ -1,13 +1,23 @@
 # This MATLAB code implements the SPHP image stitching method
 
-This warp was proposed in the SPHP paper from Chang et al. [1] in 2014.
+This warp was originally proposed in the SPHP paper by Chang et al. [1] in 2014.
+
+### OS-specific Implementation
+
+With the dependence on the mysterious `texture_mapping/texture_mapping.exe` file to apply the calculated warp to the images, this implementation is OS-specific.
+
+Currently, it is tweaked to work on Linux (and most likely MacOS - yet untested). For running this implementation on Windows, simply remove the `wine` invocation in line 86 of the file `texture_mapping.m`.
 
 ### Setting up VLFeat on Linux
 
-Compiling the needed `MEX` files it not an easy task and I already took steps to fix *compile errors* in the current version 0.9.21. For more details on this, see their [issue on GitHub](https://github.com/vlfeat/vlfeat/issues/214). Furthermore, I replaced deprecated and removed functions in the MATLAB code.
+Compiling the needed `MEX` files is not an easy task and I already took steps to fix *compile errors* in the current VLFeat version 0.9.21. 
+For more details on this, see their [issue on GitHub](https://github.com/vlfeat/vlfeat/issues/214). 
+I also replaced deprecated and removed functions in the MATLAB code.
 
-The \<YOUR-PATH\> variable used below is where you cloned this repository. For the actual compilation, you can follow these steps. 
-1. Make sure that you exported VLFeat's mex path to the `LD_LIBRARY_PATH`. Add the following line to your .bashrc file:
+The \<YOUR-PATH\> variable, that is used below, describes the clone location of this repository.
+For the actual compilation, you need to follow these steps. 
+
+1. Make sure that you exported VLFeat's mex path to `LD_LIBRARY_PATH`. Add the following line to your preferred terminal config file, e.g. ".bashrc".
 
     ```bash
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:<YOUR-PATH>/sphp-warp/vlfeat-0.9.21/toolbox/mex/mexa64/
@@ -15,7 +25,7 @@ The \<YOUR-PATH\> variable used below is where you cloned this repository. For t
 
 2. Open MATLAB. Find out where the \<MATLABROOT\> lies, using the `matlabroot` command. Find out which \<ARCH\> you are on, using the `computer` command. The output of `computer` is most likely all-caps and needs to be inserted in lowercase below.
 
-3. Open a terminal and `cd <YOUR-PATH>/sphp-warp/vlfeat-0.9.21`. Then, execute the following command:
+3. Open a terminal and `cd <YOUR-PATH>/sphp-warp/vlfeat-0.9.21`. Then, execute the following command.
 
     ```bash
     make ARCH=<ARCH> MEX=<MATLABROOT>/bin/mex
